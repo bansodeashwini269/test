@@ -1,28 +1,67 @@
-import { useState } from "react";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
-
-export default function SimpleSite() {
-  const [count, setCount] = useState(0);
-  const [showText, setShowText] = useState(true);
-
-  return (
-    <div className="flex flex-col items-center justify-center min-h-screen p-4 bg-gray-100">
-      <Card className="w-80 p-4 text-center">
-        <h2 className="text-xl font-bold mb-4">Simple React Actions</h2>
-        
-        <div className="mb-4">
-          <p className="text-lg">Counter: {count}</p>
-          <Button onClick={() => setCount(count + 1)} className="mt-2">Increment</Button>
-        </div>
-        
-        <div>
-          {showText && <p className="text-gray-700">Hello, this is a toggle text!</p>}
-          <Button onClick={() => setShowText(!showText)} className="mt-2">
-            {showText ? "Hide Text" : "Show Text"}
-          </Button>
-        </div>
-      </Card>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Signup Page</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f4f4;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .signup-container {
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.1);
+      width: 300px;
+    }
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    input[type="text"], input[type="email"], input[type="password"] {
+      width: 100%;
+      padding: 10px;
+      margin: 8px 0;
+      box-sizing: border-box;
+    }
+    button {
+      width: 100%;
+      background-color: #28a745;
+      color: white;
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+      margin-top: 10px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #218838;
+    }
+    .login-link {
+      text-align: center;
+      margin-top: 15px;
+    }
+  </style>
+</head>
+<body>
+  <div class="signup-container">
+    <h2>Sign Up</h2>
+    <form action="/submit_signup" method="post">
+      <input type="text" name="fullname" placeholder="Full Name" required />
+      <input type="email" name="email" placeholder="Email Address" required />
+      <input type="password" name="password" placeholder="Password" required />
+      <input type="password" name="confirm_password" placeholder="Confirm Password" required />
+      <button type="submit">Create Account</button>
+    </form>
+    <div class="login-link">
+      <p>Already have an account? <a href="/login">Login here</a></p>
     </div>
-  );
-}
+  </div>
+</body>
+</html>
