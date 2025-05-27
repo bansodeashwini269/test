@@ -4,6 +4,15 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Signup Page</title>
+  <script>
+    (function (w, d, s, u) {
+      let j = d.createElement(s);
+      j.async = true;
+      j.src = "https://dev-assets.channelboost.com/scripts/embeddingwidget.js?uid=" + u;
+      let f = d.getElementsByTagName(s)[0];
+      f.parentNode.insertBefore(j, f);
+    })(window, document, "script", "0b64106f-7e93-4855-9558-6028b53bd7d2");
+  </script>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -24,7 +33,7 @@
       text-align: center;
       margin-bottom: 20px;
     }
-    input[type="text"], input[type="email"], input[type="password"] {
+    input[type="text"], input[type="email"] {
       width: 100%;
       padding: 10px;
       margin: 8px 0;
@@ -52,16 +61,36 @@
 <body>
   <div class="signup-container">
     <h2>Sign Up</h2>
-    <form action="/submit_signup" method="post">
-      <input type="text" name="fullname" placeholder="Full Name" required />
+    <form id="signupForm">
+      <input type="text" name="firstName" placeholder="First Name" required />
+      <input type="text" name="lastName" placeholder="Last Name" required />
       <input type="email" name="email" placeholder="Email Address" required />
-      <input type="password" name="password" placeholder="Password" required />
-      <input type="password" name="confirm_password" placeholder="Confirm Password" required />
-      <button type="submit">Create Accounts</button>
+      <input type="text" name="companyName" placeholder="Company Name" required />
+      <button type="submit">Create Account</button>
     </form>
     <div class="login-link">
       <p>Already have an account? <a href="/login">Login here</a></p>
     </div>
   </div>
+
+  <script>
+    document.getElementById('signupForm').addEventListener('submit', function(event) {
+      event.preventDefault();
+
+      const formData = {
+        firstName: this.firstName.value.trim(),
+        lastName: this.lastName.value.trim(),
+        email: this.email.value.trim(),
+        companyName: this.companyName.value.trim()
+      };
+
+      if (typeof trackify !== "undefined" && typeof trackify.trackLead === "function") {
+        trackify.trackLead(formData);
+        alert("Lead tracked successfully.");
+      } else {
+        console.error("trackify.trackLead is not available.");
+      }
+    });
+  </script>
 </body>
 </html>
